@@ -1,46 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-    int num;
-} Valores;
-
-Valores listas[10];
-
-
-void incluir(){
-    for(int i = 0; i < 10; i++){
-        printf("Digite o (%d) valor: \n", i + 1);
-        scanf("%d", listas[i].num);
-    }
-}
-
-void mostrar(){
-    printf("Lista de valores: \n");
-    for(int i = 0; i < 10; i++){
-        printf("%d - Valor: \n", i + 1, listas[i].num);
-    }
-}
-
-int procurar(int dado){
-    for(int i = 0; i < 10; i++){
-        if(listas[i].num == dado){
-            return i;
-        }
-    }
-
-    return -1;
-}
-
-void remover(int rem){
-    if(rem >= 0 && rem < 10){
-        listas[rem] = listas[9];
-    } else {
-        printf("Posição inválida");
-    }
-}
+#include <lista.h>
 
 int main(){
+    Lista *lista = (Lista*)malloc(sizeof (Lista));
+    Lista *novo = (Lista*)malloc(sizeof (Lista));
+
     char menu[] = "\n>>> Bem-vindo(a) <<<\n\
     1 - Inserir \n\
     2 - Mostrar  \n\
@@ -55,7 +20,10 @@ int main(){
     while(opcao != 0){
         if (opcao == 1){
             //inserir
-            incluir();
+            int numero;
+            printf("Digite um número: \n");
+            scanf("%d", &numero);
+            inserir(novo, numero);
 
         } else if(opcao == 2){
             //mostrar
@@ -66,15 +34,14 @@ int main(){
             int dado;
             printf("Digite um número: \n");
             scanf("%d", &dado);
-            procurar(dado);
+            procurar(lista, dado);
             
         } else if(opcao == 4){
-            //remover da lista
-            int numero;
+            //remover da lista e mostrar
+            int rem;
             printf("Digite um número para remover: \n");
-            scanf("%d", &numero);
-            remover(numero);
-            mostrar();
+            scanf("%d", rem);
+            remover_final(lista, rem);
         
         } else {
             printf("Opcao Invalida");
@@ -83,6 +50,6 @@ int main(){
         printf("%s", menu);
         scanf("%d", &opcao);
     }
-    
+
     return 0;
 }
