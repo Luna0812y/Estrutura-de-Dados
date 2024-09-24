@@ -1,57 +1,55 @@
+// Implementação
 #include <stdio.h>
 #include <stdlib.h>
 #include "ponto.h"
 
-Ponto* criar_ponto(){
-    Ponto *ponto = (Ponto *)malloc(sizeof(Ponto)); 
-    if(ponto){
-        ponto->count = 0;
-    }
-    return ponto; 
+void criar(Ponto *ponto){
+    printf("Preencha \n");
+    printf("-- Ponto X \n>> ");
+    scanf("%d", &ponto->X);
+    printf("-- Ponto Y \n>> ");
+    scanf("%d", &ponto->Y);
 }
 
-void incluir(Ponto *ponto){
-    if(ponto->count >= MAX_PONTOS){
-        printf("Limite de pontos alcancado.\n");
-        return;
-    }
-    
-    for(int i = ponto->count; i < MAX_PONTOS; i++){
-        printf("Digite o (%d) valor: \n", i + 1);
-        scanf("%d", &ponto->num[i]);
-        ponto->count++;
-        
-        if(ponto->count >= MAX_PONTOS){
-            break;
+void acessar(Ponto *ponto){ 
+   printf("X = %d\n", ponto->X);
+   printf("Y = %d\n", ponto->Y);
+}
+
+void calcular(Ponto *ponto){
+
+    char menu[] = "\n>>> Bem-vindo(a) <<< \n\
+    1 - Adição \n\
+    2 - Subtração  \n\
+    3 - Multiplicação \n\
+    0 - Sair   \n\
+    >>> ";
+    int opcao;
+    printf("%s", menu);
+    scanf("%d", &opcao);
+
+    while(opcao != 0){
+        if (opcao == 1){
+            //Soma
+            printf("Soma: \n");
+            printf("%d", ponto->X + ponto->Y);
+
+        } else if(opcao == 2){
+            //Subtrai
+            printf("Subtração: \n");
+            printf("%d", ponto->X - ponto->Y);
+            
+        } else if(opcao == 3){
+            //Multiplica
+            printf("Soma: \n");
+            printf("%d", ponto->X * ponto->Y);
+            
+        } else {
+            printf("Opcao Invalida");
         }
+
+        printf("%s", menu);
+        scanf("%d", &opcao);
     }
-}
 
-
-void mostrar(Ponto *ponto){
-    printf("Lista de valores: \n");
-    for(int i = 0; i < ponto->count; i++){
-        printf("%d - Valor: %d\n", i + 1, ponto->num[i]);
-    }
-}
-
-
-int procurar(Ponto *ponto, int dado){
-    for(int i = 0; i < ponto->count; i++){
-        if(ponto->num[i] == dado){
-            return i;
-        }
-    }
-    return -1;
-}
-
-void remover(Ponto *ponto, int rem){
-    if(rem >= 0 && rem < ponto->count){
-        for(int i = rem; i < ponto->count - 1; i++){
-            ponto->num[i] = ponto->num[i + 1]; 
-        }
-        ponto->count--; 
-    }else{
-        printf("Posicao invalida\n");
-    }
 }

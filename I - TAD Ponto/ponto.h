@@ -1,12 +1,10 @@
-#define MAX_PONTOS 10
+//Interface
+typedef struct{
+    int X;
+    int Y;
+}Ponto;
 
-typedef struct {
-    int num[MAX_PONTOS];
-    int count; 
-} Ponto;
-
-Ponto* criar_ponto();
-void incluir(Ponto *ponto);
-void mostrar(Ponto *ponto);
-int procurar(Ponto *ponto, int dado);
-void remover(Ponto *ponto, int rem);
+void criar(Ponto *ponto);
+void acessar(Ponto *ponto);
+void calcular(Ponto *ponto);
+// void liberar(Ponto *ponto);
